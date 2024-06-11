@@ -6,7 +6,7 @@ Red Fox FTP Brute Force Script
 ### How to use
 
 ```
-python redfoxbrute.py ftpserver username wordlist.txt
+python redfoxbruteftp.py ftpserver username wordlist.txt
 ```
 ### OS Tested
 
