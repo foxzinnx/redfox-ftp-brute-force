@@ -32,13 +32,10 @@ except FileNotFoundError:
     print(f"File {wordlist_path} not found.")
     sys.exit(1)
 
-# Print initial brute force message
 print(f"{Style.BRIGHT}{Fore.CYAN}[+] Starting Brute Force on FTP with user {Fore.LIGHTMAGENTA_EX}{user}{Style.RESET_ALL}")
 
-# Capture start time
 start_time = datetime.now()
 
-# Initialize variables for printing control
 last_printed_progress = ""
 
 for idx, password in enumerate(passwords, start=1):
@@ -55,27 +52,21 @@ for idx, password in enumerate(passwords, start=1):
         tcp.sendall("QUIT\r\n".encode('utf-8'))
         tcp.close()
 
-        # Calculate elapsed time
         elapsed_time = datetime.now() - start_time
 
-        # Calculate estimated remaining time
         if idx < len(passwords):
             remaining_time = timedelta(seconds=((len(passwords) - idx) * elapsed_time.total_seconds() / idx))
         else:
             remaining_time = timedelta(seconds=0)
 
-        # Format elapsed time without milliseconds
         elapsed_time_formatted = str(elapsed_time).split(".")[0]
 
-        # Format remaining time without milliseconds
         remaining_time_formatted = str(remaining_time).split(".")[0]
 
-        # Format progress message
         progress_message = (
             f"\r{Style.BRIGHT}{Fore.YELLOW}Attempts: {idx}/{len(passwords)} | Elapsed Time: {elapsed_time_formatted} | Estimated Remaining Time: {remaining_time_formatted}"
         )
 
-        # Print only if progress changes
         if progress_message != last_printed_progress:
             print(progress_message, end="", flush=True)
             last_printed_progress = progress_message
